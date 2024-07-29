@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+  <head>
+    {{ content_for_header }}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Boutique | Ecommerce bootstrap template</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <!-- gLightbox gallery -->
+    {{ 'glightbox.min.css' |  asset_url |  stylesheet_tag }}
+    <!-- Range slider -->
+    {{ 'nouislider.min.css' |  asset_url |  stylesheet_tag }}
+    <!-- Choices CSS -->
+    {{ 'choices.min.css' |  asset_url |  stylesheet_tag }}
+    <!-- Swiper slider -->
+    {{ 'swiper-bundle.min.css' |  asset_url |  stylesheet_tag }}
+    <!-- Google fonts -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;400;700&amp;display=swap"
+    >
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Martel+Sans:wght@300;400;800&amp;display=swap"
+    >
+    <!-- theme stylesheet -->
+    {{ 'style.default.css' |  asset_url |  stylesheet_tag }}
+    <!-- Custom stylesheet - for your changes -->
+    {{ 'custom.css' |  asset_url |  stylesheet_tag }}
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="assets/favicon.png">
+  </head>
+
+  <body>
+    {{ content_for_layout }}
+    {{ 'bootstrap.bundle.min.js' |  asset_url |  script_tag }}
+    {{ 'glightbox.min.js' |  asset_url |  script_tag }}
+    {{ 'nouislider.min.js' |  asset_url |  script_tag }}
+    {{ 'swiper-bundle.min.js' |  asset_url |  script_tag }}
+    {{ 'choices.min.js' |  asset_url |  script_tag }}
+    {{ 'front.js' |  asset_url |  script_tag }}
+    <script>
+      // ------------------------------------------------------- //
+      //   Inject SVG Sprite -
+      //   see more here
+      //   https://css-tricks.com/ajaxing-svg-sprite/
+      // ------------------------------------------------------ //
+      function injectSvgSprite(path) {
+
+          var ajax = new XMLHttpRequest();
+          ajax.open("GET", path, true);
+          ajax.send();
+          ajax.onload = function(e) {
+          var div = document.createElement("div");
+          div.className = 'd-none';
+          div.innerHTML = ajax.responseText;
+          document.body.insertBefore(div, document.body.childNodes[0]);
+          }
+      }
+      // this is set to BootstrapTemple website as you cannot
+      // inject local SVG sprite (using only 'icons/orion-svg-sprite.svg' path)
+      // while using file:// protocol
+      // pls don't forget to change to your domain :)
+      injectSvgSprite('https://bootstraptemple.com/files/icons/orion-svg-sprite.svg');
+    </script>
+    <!-- FontAwesome CSS - loading as last, so it doesn't block rendering -->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+      crossorigin="anonymous"
+    >
+  </body>
+</html>
