@@ -1,14 +1,14 @@
 <div class="container">
   <section
     class="hero pb-3 bg-cover bg-center d-flex align-items-center"
-    style="background: url({{ section.settings.hero_image | image_url }})"
+    style="background: url({{ section.settings.hero_collection.featured_image | image_url }})"
   >
     <div class="container py-5">
       <div class="row px-4 px-lg-5">
         <div class="col-lg-6">
           <p class="text-muted small text-uppercase mb-2">{{ section.settings.hero_light_text }}</p>
           <h1 class="h2 text-uppercase mb-3">{{ section.settings.hero_bold_text }}</h1>
-          <a class="btn btn-dark" href="shop.html">Browse collections</a>
+          <a class="btn btn-dark" href="{{ section.settings.hero_collection.url }}">Browse collections</a>
         </div>
       </div>
     </div>
@@ -21,21 +21,44 @@
     </header>
     <div class="row">
       <div class="col-md-4">
-        <a class="category-item" href="shop.html"
-          ><img class="img-fluid" src="img/cat-img-1.jpg" alt=""><strong class="category-item-title">Clothes</strong></a
+        <a class="category-item" href="{{ section.settings.collection_left.url }}"
+          ><img
+            class="img-fluid"
+            src="{{ section.settings.collection_left.featured_image | image_url }}"
+            alt=""
+            width="100%"
+
+          ><strong class="category-item-title">{{ section.settings.collection_left.title }}</strong></a
         >
       </div>
       <div class="col-md-4">
-        <a class="category-item mb-4" href="shop.html"
-          ><img class="img-fluid" src="img/cat-img-2.jpg" alt=""><strong class="category-item-title">Shoes</strong></a
-        ><a class="category-item" href="shop.html"
-          ><img class="img-fluid" src="img/cat-img-3.jpg" alt=""><strong class="category-item-title">Watches</strong></a
+        <a class="category-item mb-4" href="{{ section.settings.collection_top.url }}"
+          ><img
+            class="img-fluid"
+            src="{{ section.settings.collection_top.featured_image | image_url }}"
+            alt=""
+            width="100%"
+
+          ><strong class="category-item-title">{{ section.settings.collection_top.title }}</strong></a
+        ><a class="category-item" href="{{ section.settings.collection_bottom.url }}"
+          ><img
+            class="img-fluid"
+            src="{{ section.settings.collection_bottom.featured_image | image_url }}"
+            alt=""
+            width="100%"
+
+          ><strong class="category-item-title">{{ section.settings.collection_bottom.title }}</strong></a
         >
       </div>
       <div class="col-md-4">
-        <a class="category-item" href="shop.html"
-          ><img class="img-fluid" src="img/cat-img-4.jpg" alt=""
-          ><strong class="category-item-title">Electronics</strong></a
+        <a class="category-item" href="{{ section.settings.collection_left.url }}"
+          ><img
+            class="img-fluid"
+            src="{{ section.settings.collection_right.featured_image | image_url }}"
+            alt=""
+            width="100%"
+
+          ><strong class="category-item-title">{{ section.settings.collection_right.title }}</strong></a
         >
       </div>
     </div>
@@ -48,6 +71,71 @@
     </header>
     <div class="row">
       {% for product in section.settings.ft_collection.products limit: section.settings.limit_number %}
+        <!-- Modal -->
+        <div class="modal fade" id="productView" tabindex="-1">
+          <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content overflow-hidden border-0">
+              <button
+                class="btn-close p-4 position-absolute top-0 end-0 z-index-20 shadow-0"
+                type="button"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+              <div class="modal-body p-0">
+                <div class="row align-items-stretch">
+                  <div class="col-lg-6 p-lg-0">
+                    <a
+                      class="glightbox product-view d-block h-100 bg-cover bg-center"
+                      style="background: url({{ product.featured_image | image_url }})"
+                      href="{{ product.featured_image | image_url }}"
+                      data-gallery="gallery1"
+                      data-glightbox="{{ product.title }}"
+                    ></a>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="p-4 my-md-4">
+                      <ul class="list-inline mb-2">
+                        <li class="list-inline-item m-0"><i class="fas fa-star small text-warning"></i></li>
+                        <li class="list-inline-item m-0 1"><i class="fas fa-star small text-warning"></i></li>
+                        <li class="list-inline-item m-0 2"><i class="fas fa-star small text-warning"></i></li>
+                        <li class="list-inline-item m-0 3"><i class="fas fa-star small text-warning"></i></li>
+                        <li class="list-inline-item m-0 4"><i class="fas fa-star small text-warning"></i></li>
+                      </ul>
+                      <h2 class="h4">{{ product.title }}</h2>
+                      <p class="text-muted">{{ product.price | money }}</p>
+                      <p class="text-sm mb-4">
+                        {{ product.content }}
+                      </p>
+                      <div class="row align-items-stretch mb-4 gx-0">
+                        <div class="col-sm-7">
+                          <div class="border d-flex align-items-center justify-content-between py-1 px-3">
+                            <span class="small text-uppercase text-gray mr-4 no-select">Quantity</span>
+                            <div class="quantity">
+                              <button class="dec-btn p-0"><i class="fas fa-caret-left"></i></button>
+                              <input class="form-control border-0 shadow-0 p-0" type="text" value="1">
+                              <button class="inc-btn p-0"><i class="fas fa-caret-right"></i></button>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-sm-5">
+                          <a
+                            class="btn btn-dark btn-sm w-100 h-100 d-flex align-items-center justify-content-center px-0"
+                            href="/cart/add/{{ product.variants.first.id }}"
+                            >Add to cart</a
+                          >
+                        </div>
+                      </div>
+                      <a class="btn btn-link text-dark text-decoration-none p-0" href="#!"
+                        ><i class="far fa-heart me-2"></i>Add to wish list</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="col-xl-3 col-lg-4 col-sm-6">
           <div class="product text-center">
             <div class="position-relative mb-3">
@@ -65,7 +153,7 @@
                     <a class="btn btn-sm btn-outline-dark" href="#!"><i class="far fa-heart"></i></a>
                   </li>
                   <li class="list-inline-item m-0 p-0">
-                    <a class="btn btn-sm btn-dark" href="cart.html">Add to cart</a>
+                    <a class="btn btn-sm btn-dark" href="/cart/add/{{ product.variants.first.id }}">Add to cart</a>
                   </li>
                   <li class="list-inline-item me-0">
                     <a class="btn btn-sm btn-outline-dark" href="#productView" data-bs-toggle="modal"
@@ -137,9 +225,9 @@
   "name": "Boutique Hero",
   "settings": [
     {
-      "type": "image_picker",
-      "id": "hero_image",
-      "label": "Hero Image"
+      "type": "collection",
+      "id": "hero_collection",
+      "label": "Hero Collection"
     },
     {
       "type": "text",
@@ -160,6 +248,26 @@
       "type": "text",
       "id": "category_bold_text",
       "label": "Category Bold Text"
+    },
+    {
+      "type": "collection",
+      "id": "collection_left",
+      "label": "Collection Left"
+    },
+    {
+      "type": "collection",
+      "id": "collection_top",
+      "label": "Collection Top"
+    },
+    {
+      "type": "collection",
+      "id": "collection_bottom",
+      "label": "Collection Bottom"
+    },
+    {
+      "type": "collection",
+      "id": "collection_right",
+      "label": "Collection Right"
     },
     {
       "type": "text",
