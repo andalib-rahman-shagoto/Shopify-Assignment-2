@@ -6,8 +6,13 @@
     <div class="container py-5">
       <div class="row px-4 px-lg-5">
         <div class="col-lg-6">
-          <p class="text-muted small text-uppercase mb-2">{{ section.settings.hero_light_text }}</p>
-          <h1 class="h2 text-uppercase mb-3">{{ section.settings.hero_bold_text }}</h1>
+          <!-- Removed a class from p tag: text-muted -->
+          <p class="small text-uppercase mb-2" style="color:{{ section.settings.hero_light_color }};">
+            {{ section.settings.hero_light_text }}
+          </p>
+          <h1 class="h2 text-uppercase mb-3" style="color:{{ section.settings.hero_bold_color }};">
+            {{ section.settings.hero_bold_text }}
+          </h1>
           <a class="btn btn-dark" href="{{ section.settings.hero_collection.url }}">Browse collections</a>
         </div>
       </div>
@@ -112,7 +117,13 @@
                             <span class="small text-uppercase text-gray mr-4 no-select">Quantity</span>
                             <div class="quantity">
                               <button class="dec-btn p-0"><i class="fas fa-caret-left"></i></button>
-                              <input class="form-control border-0 shadow-0 p-0" type="text" value="1">
+                              <input
+                                id="count"
+                                class="form-control border-0 shadow-0 p-0"
+                                type="text"
+                                value="1"
+                                min="1"
+                              >
                               <button class="inc-btn p-0"><i class="fas fa-caret-right"></i></button>
                             </div>
                           </div>
@@ -139,11 +150,24 @@
         <div class="col-xl-3 col-lg-4 col-sm-6">
           <div class="product text-center">
             <div class="position-relative mb-3">
-              <div class="badge text-white bg-">
+              {% for tag in product.tags %}
+                {% if tag == 'sale' %}
+                  <div class="badge text-white bg-primary">Sale</div>
+                  {% break %}
+                {% elsif tag == 'new' %}
+                  <div class="badge text-white bg-info">New</div>
+                  {% break %}
+                {% elsif tag == 'sold' %}
+                  <div class="badge text-white bg-danger">Sold</div>
+                  {% break %}
+                {% else %}
+                  <div class="badge text-white bg-"></div>
+                {% endif %}
+
                 {% comment %}
                   Add sale/new/sold here and bg-primary/info/danger for label in image
                 {% endcomment %}
-              </div>
+              {% endfor %}
               <a class="d-block" href="{{ product.url }}"
                 ><img class="img-fluid w-100" src="{{ product.featured_image | image_url }}" alt="..."
               ></a>
@@ -203,17 +227,23 @@
           <p class="text-sm text-muted mb-0">{{ section.settings.nl_light_text }}</p>
         </div>
         <div class="col-lg-6">
-          <form action="#">
+          {% form 'customer' %}
             <div class="input-group">
+              <input type="hidden" name="contact[tags]" value="newsletter">
               <input
                 class="form-control form-control-lg"
+                name="contact[email]"
                 type="email"
+                value="{{ form.email }}"
                 placeholder="Enter your email address"
                 aria-describedby="button-addon2"
               >
               <button class="btn btn-dark" id="button-addon2" type="submit">Subscribe</button>
             </div>
-          </form>
+            {% if form.posted_successfully? %}
+              <p class="text-muted">Thank you for subscribing!</p>
+            {% endif %}
+          {% endform %}
         </div>
       </div>
     </div>
@@ -235,9 +265,21 @@
       "label": "Hero Light Text"
     },
     {
+      "type": "color",
+      "id": "hero_light_color",
+      "label": "Hero Light Color",
+      "default": "#6c757d"
+    },
+    {
       "type": "text",
       "id": "hero_bold_text",
-      "label": "Hero Light Text"
+      "label": "Hero Bold Text"
+    },
+    {
+      "type": "color",
+      "id": "hero_bold_color",
+      "label": "Hero Bold Color",
+      "default": "#212529"
     },
     {
       "type": "text",
