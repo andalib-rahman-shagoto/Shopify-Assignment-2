@@ -1,0 +1,241 @@
+<div class="container">
+  <section class="py-5">
+    <div class="container p-0">
+      <div class="row">
+        <!-- SHOP SIDEBAR -->
+        <div class="col-lg-3 order-2 order-lg-1">
+          <h5 class="text-uppercase mb-4">Categories</h5>
+          {% for block in section.blocks %}
+            {% if block.type == 'category' %}
+              <div class="py-2 px-4 bg-dark text-white mb-3">
+                <strong class="small text-uppercase fw-bold">{{ block.settings.category_title }}</strong>
+              </div>
+
+              <ul class="list-unstyled small text-muted ps-lg-4 font-weight-normal">
+                <li class="mb-2">
+                  <a class="reset-anchor" href="{{ block.settings.collection_name1.url }}">
+                    {{- block.settings.collection_name1.title -}}
+                  </a>
+                </li>
+                <li class="mb-2">
+                  <a class="reset-anchor" href="{{ block.settings.collection_name2.url }}">
+                    {{- block.settings.collection_name2.title -}}
+                  </a>
+                </li>
+                <li class="mb-2">
+                  <a class="reset-anchor" href="{{ block.settings.collection_name3.url }}">
+                    {{- block.settings.collection_name3.title -}}
+                  </a>
+                </li>
+                <li class="mb-2">
+                  <a class="reset-anchor" href="{{ block.settings.collection_name4.url }}">
+                    {{- block.settings.collection_name4.title -}}
+                  </a>
+                </li>
+                <li class="mb-2">
+                  <a class="reset-anchor" href="{{ block.settings.collection_name5.url }}">
+                    {{- block.settings.collection_name5.title -}}
+                  </a>
+                </li>
+                <li class="mb-2">
+                  <a class="reset-anchor" href="{{ block.settings.collection_name6.url }}">
+                    {{- block.settings.collection_name6.title -}}
+                  </a>
+                </li>
+              </ul>
+            {% endif %}
+          {% endfor %}
+
+          <!-- Price Range -->
+          <h6 class="text-uppercase mb-4">Price range</h6>
+          <div class="price-range pt-4 mb-5">
+            <div id="range"></div>
+            <div class="row pt-2">
+              <div class="col-6"><strong class="small fw-bold text-uppercase">From</strong></div>
+              <div class="col-6 text-end"><strong class="small fw-bold text-uppercase">To</strong></div>
+            </div>
+          </div>
+          <h6 class="text-uppercase mb-3">Show only</h6>
+          <div class="form-check mb-1">
+            <input class="form-check-input" type="checkbox" id="checkbox_1">
+            <label class="form-check-label" for="checkbox_1">Returns Accepted</label>
+          </div>
+          <div class="form-check mb-1">
+            <input class="form-check-input" type="checkbox" id="checkbox_2">
+            <label class="form-check-label" for="checkbox_2">Returns Accepted</label>
+          </div>
+          <div class="form-check mb-1">
+            <input class="form-check-input" type="checkbox" id="checkbox_3">
+            <label class="form-check-label" for="checkbox_3">Completed Items</label>
+          </div>
+          <div class="form-check mb-1">
+            <input class="form-check-input" type="checkbox" id="checkbox_4">
+            <label class="form-check-label" for="checkbox_4">Sold Items</label>
+          </div>
+          <div class="form-check mb-1">
+            <input class="form-check-input" type="checkbox" id="checkbox_5">
+            <label class="form-check-label" for="checkbox_5">Deals &amp; Savings</label>
+          </div>
+          <div class="form-check mb-4">
+            <input class="form-check-input" type="checkbox" id="checkbox_6">
+            <label class="form-check-label" for="checkbox_6">Authorized Seller</label>
+          </div>
+          <h6 class="text-uppercase mb-3">Buying format</h6>
+          <div class="form-check mb-1">
+            <input class="form-check-input" type="radio" name="customRadio" id="radio_1">
+            <label class="form-check-label" for="radio_1">All Listings</label>
+          </div>
+          <div class="form-check mb-1">
+            <input class="form-check-input" type="radio" name="customRadio" id="radio_2">
+            <label class="form-check-label" for="radio_2">Best Offer</label>
+          </div>
+          <div class="form-check mb-1">
+            <input class="form-check-input" type="radio" name="customRadio" id="radio_3">
+            <label class="form-check-label" for="radio_3">Auction</label>
+          </div>
+          <div class="form-check mb-1">
+            <input class="form-check-input" type="radio" name="customRadio" id="radio_4">
+            <label class="form-check-label" for="radio_4">Buy It Now</label>
+          </div>
+        </div>
+
+        <!-- SHOP LISTING -->
+        <div class="col-lg-9 order-1 order-lg-2 mb-5 mb-lg-0">
+          <div class="row mb-3 align-items-center">
+            <div class="col-lg-6 mb-2 mb-lg-0">
+              <p class="text-sm text-muted mb-0">Showing 1–12 of 53 results</p>
+            </div>
+            <div class="col-lg-6">
+              <ul class="list-inline d-flex align-items-center justify-content-lg-end mb-0">
+                <li class="list-inline-item text-muted me-3">
+                  <a class="reset-anchor p-0" href="#!"><i class="fas fa-th-large"></i></a>
+                </li>
+                <li class="list-inline-item text-muted me-3">
+                  <a class="reset-anchor p-0" href="#!"><i class="fas fa-th"></i></a>
+                </li>
+                <li class="list-inline-item">
+                  <select class="selectpicker" data-customclass="form-control form-control-sm">
+                    <option value>Sort By</option>
+                    <option value="default">Default sorting</option>
+                    <option value="popularity">Popularity</option>
+                    <option value="low-high">Price: Low to High</option>
+                    <option value="high-low">Price: High to Low</option>
+                  </select>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Products -->
+          <div class="row">
+            {% for product in collections.display.products %}
+              <div class="col-lg-4 col-sm-6">
+                <div class="product text-center">
+                  <div class="mb-3 position-relative">
+                    <div class="badge text-white bg-"></div>
+                    <a class="d-block" href="{{ product.url }}"
+                      ><img class="img-fluid w-100" src="{{ product.featured_image | image_url }}" alt="..."
+                    ></a>
+                    <div class="product-overlay">
+                      <ul class="mb-0 list-inline">
+                        <li class="list-inline-item m-0 p-0">
+                          <a class="btn btn-sm btn-outline-dark" href="#!"><i class="far fa-heart"></i></a>
+                        </li>
+                        <li class="list-inline-item m-0 p-0">
+                          <a class="btn btn-sm btn-dark" href="/cart/add/{{ product.variants.first.id }}"
+                            >Add to cart</a
+                          >
+                        </li>
+                        <li class="list-inline-item mr-0">
+                          <a class="btn btn-sm btn-outline-dark" href="#productView" data-bs-toggle="modal"
+                            ><i class="fas fa-expand"></i
+                          ></a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <h6>
+                    <a class="reset-anchor" href="detail.html">{{ product.title }}</a>
+                  </h6>
+                  <p class="small text-muted">{{ product.price | money }}</p>
+                </div>
+              </div>
+            {% endfor %}
+            {% for collection in collections %}
+            {% endfor %}
+          </div>
+
+          <!-- PAGINATION -->
+          <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center justify-content-lg-end">
+              <li class="page-item mx-1">
+                <a class="page-link" href="#!" aria-label="Previous"><span aria-hidden="true">«</span></a>
+              </li>
+              <li class="page-item mx-1 active"><a class="page-link" href="#!">1</a></li>
+              <li class="page-item mx-1"><a class="page-link" href="#!">2</a></li>
+              <li class="page-item mx-1"><a class="page-link" href="#!">3</a></li>
+              <li class="page-item ms-1">
+                <a class="page-link" href="#!" aria-label="Next"><span aria-hidden="true">»</span></a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Boutique All Collection",
+  "settings": [],
+  "blocks": [
+    {
+      "name": "Category",
+      "type": "category",
+      "settings": [
+        {
+          "type": "text",
+          "id": "category_title",
+          "label": "Category Title"
+        },
+        {
+          "type": "collection",
+          "id": "collection_name1",
+          "label": "Collection Name 1"
+        },
+        {
+          "type": "collection",
+          "id": "collection_name2",
+          "label": "Collection Name 2"
+        },
+        {
+          "type": "collection",
+          "id": "collection_name3",
+          "label": "Collection Name 3"
+        },
+        {
+          "type": "collection",
+          "id": "collection_name4",
+          "label": "Collection Name 4"
+        },
+        {
+          "type": "collection",
+          "id": "collection_name5",
+          "label": "Collection Name 5"
+        },
+        {
+          "type": "collection",
+          "id": "collection_name6",
+          "label": "Collection Name 6"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "boutique_all_collection"
+    }
+  ]
+}
+{% endschema %}

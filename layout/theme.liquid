@@ -9,13 +9,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
     <!-- gLightbox gallery -->
-    {{ 'glightbox.min.css' |  asset_url |  stylesheet_tag }}
+    {{ 'glightbox.min.css' | asset_url | stylesheet_tag }}
     <!-- Range slider -->
-    {{ 'nouislider.min.css' |  asset_url |  stylesheet_tag }}
+    {{ 'nouislider.min.css' | asset_url | stylesheet_tag }}
     <!-- Choices CSS -->
-    {{ 'choices.min.css' |  asset_url |  stylesheet_tag }}
+    {{ 'choices.min.css' | asset_url | stylesheet_tag }}
     <!-- Swiper slider -->
-    {{ 'swiper-bundle.min.css' |  asset_url |  stylesheet_tag }}
+    {{ 'swiper-bundle.min.css' | asset_url | stylesheet_tag }}
     <!-- Google fonts -->
     <link
       rel="stylesheet"
@@ -26,21 +26,46 @@
       href="https://fonts.googleapis.com/css2?family=Martel+Sans:wght@300;400;800&amp;display=swap"
     >
     <!-- theme stylesheet -->
-    {{ 'style.default.css' |  asset_url |  stylesheet_tag }}
+    {{ 'style.default.css' | asset_url | stylesheet_tag }}
     <!-- Custom stylesheet - for your changes -->
-    {{ 'custom.css' |  asset_url |  stylesheet_tag }}
+    {{ 'custom.css' | asset_url | stylesheet_tag }}
     <!-- Favicon -->
     <link rel="shortcut icon" href="assets/favicon.png">
   </head>
 
   <body>
     {{ content_for_layout }}
-    {{ 'bootstrap.bundle.min.js' |  asset_url |  script_tag }}
-    {{ 'glightbox.min.js' |  asset_url |  script_tag }}
-    {{ 'nouislider.min.js' |  asset_url |  script_tag }}
-    {{ 'swiper-bundle.min.js' |  asset_url |  script_tag }}
-    {{ 'choices.min.js' |  asset_url |  script_tag }}
-    {{ 'front.js' |  asset_url |  script_tag }}
+    {{ 'bootstrap.bundle.min.js' | asset_url | script_tag }}
+    {{ 'glightbox.min.js' | asset_url | script_tag }}
+    {{ 'nouislider.min.js' | asset_url | script_tag }}
+    {{ 'swiper-bundle.min.js' | asset_url | script_tag }}
+    {{ 'choices.min.js' | asset_url | script_tag }}
+    {{ 'front.js' | asset_url | script_tag }}
+    <script>
+      var range = document.getElementById('range');
+      noUiSlider.create(range, {
+          range: {
+              'min': 0,
+              'max': 2000
+          },
+          step: 5,
+          start: [100, 1000],
+          margin: 300,
+          connect: true,
+          direction: 'ltr',
+          orientation: 'horizontal',
+          behaviour: 'tap-drag',
+          tooltips: true,
+          format: {
+            to: function ( value ) {
+              return '$' + value;
+            },
+            from: function ( value ) {
+              return value.replace('', '');
+            }
+          }
+      });
+    </script>
     <script>
       // ------------------------------------------------------- //
       //   Inject SVG Sprite -
