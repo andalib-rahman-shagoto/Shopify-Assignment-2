@@ -111,4 +111,6 @@ document.addEventListener('DOMContentLoaded', function () {
 			siblings.value = parseInt(siblings.value, 10) + 1;
 		});
 	});
+
+  /* My own Javascript */
 });
