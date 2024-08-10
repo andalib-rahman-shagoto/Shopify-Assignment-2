@@ -43,13 +43,26 @@
     {{ 'front.js' | asset_url | script_tag }}
     <script>
       var range = document.getElementById('range');
+      var left = 100;
+      var right = 1000;
+      var url = new URL(window.location.href);
+
+      if(url.searchParams.has("filter.v.price.gte"))
+      {
+        left = url.searchParams.get("filter.v.price.gte");
+      }
+      if(url.searchParams.has("filter.v.price.lte"))
+      {
+        right = url.searchParams.get("filter.v.price.lte");
+      }
+
       noUiSlider.create(range, {
           range: {
               'min': 0,
               'max': 2000
           },
           step: 5,
-          start: [100, 1000],
+          start: [left, right],
           margin: 300,
           connect: true,
           direction: 'ltr',
@@ -66,6 +79,7 @@
           }
       });
     </script>
+
     <script>
       // ------------------------------------------------------- //
       //   Inject SVG Sprite -
