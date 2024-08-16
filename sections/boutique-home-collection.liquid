@@ -1,0 +1,118 @@
+<div class="container">
+  <section class="pt-5">
+    <header class="text-center">
+      <p class="small text-muted small text-uppercase mb-1" style="text-align: {{ section.settings.text_position }}">
+        {{ section.settings.category_light_text }}
+      </p>
+      <h2 class="h5 text-uppercase mb-4" style="text-align: {{ section.settings.text_position }}">
+        {{ section.settings.category_bold_text }}
+      </h2>
+    </header>
+    <div class="row">
+      <div class="col-md-4">
+        <a class="category-item" href="{{ section.settings.collection_left.url }}">
+          <img
+            class="img-fluid"
+            src="{{ section.settings.collection_left.featured_image | image_url }}"
+            alt=""
+            width="100%"
+
+          >
+          <strong class="category-item-title">{{ section.settings.collection_left.title }}</strong></a>
+      </div>
+      <div class="col-md-4">
+        <a class="category-item mb-4" href="{{ section.settings.collection_top.url }}"
+          ><img
+            class="img-fluid"
+            src="{{ section.settings.collection_top.featured_image | image_url }}"
+            alt=""
+            width="100%"
+
+          ><strong class="category-item-title">{{ section.settings.collection_top.title }}</strong></a
+        ><a class="category-item" href="{{ section.settings.collection_bottom.url }}"
+          ><img
+            class="img-fluid"
+            src="{{ section.settings.collection_bottom.featured_image | image_url }}"
+            alt=""
+            width="100%"
+
+          ><strong class="category-item-title">{{ section.settings.collection_bottom.title }}</strong></a
+        >
+      </div>
+      <div class="col-md-4">
+        <a class="category-item" href="{{ section.settings.collection_left.url }}"
+          ><img
+            class="img-fluid"
+            src="{{ section.settings.collection_right.featured_image | image_url }}"
+            alt=""
+            width="100%"
+
+          ><strong class="category-item-title">{{ section.settings.collection_right.title }}</strong></a
+        >
+      </div>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Home Collection",
+  "settings": [
+    {
+      "type": "select",
+      "id": "text_position",
+      "label": "Text Position",
+      "default": "center",
+      "options": [
+        {
+          "label": "Left",
+          "value": "left"
+        },
+        {
+          "label": "Middle",
+          "value": "center"
+        },
+        {
+          "label": "Right",
+          "value": "right"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "category_light_text",
+      "label": "Category Light Text"
+    },
+    {
+      "type": "text",
+      "id": "category_bold_text",
+      "label": "Category Bold Text"
+    },
+    {
+      "type": "collection",
+      "id": "collection_left",
+      "label": "Collection Left"
+    },
+    {
+      "type": "collection",
+      "id": "collection_top",
+      "label": "Collection Top"
+    },
+    {
+      "type": "collection",
+      "id": "collection_bottom",
+      "label": "Collection Bottom"
+    },
+    {
+      "type": "collection",
+      "id": "collection_right",
+      "label": "Collection Right"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Home Collection"
+    }
+  ]
+}
+{% endschema %}

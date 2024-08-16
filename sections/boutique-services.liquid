@@ -1,0 +1,60 @@
+<div class="container">
+  <section class="py-5 bg-light">
+    <div class="container">
+      <div class="row text-center gy-3">
+        {% for block in section.blocks %}
+          <div class="col-lg-4">
+            <div class="d-inline-block">
+              <div class="d-flex align-items-end">
+                <svg class="svg-icon svg-icon-big svg-icon-light">
+                  <use xlink:href="#{{ block.settings.service_icon }}"> </use>
+                </svg>
+                <div class="text-start ms-3">
+                  <h6 class="text-uppercase mb-1">
+                    {{ block.settings.title }}
+                  </h6>
+                  <p class="text-sm mb-0 text-muted">{{ block.settings.service_text }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Service Section",
+  "settings": [],
+  "blocks": [
+    {
+      "name": "Service",
+      "type": "service",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Service Title"
+        },
+        {
+          "type": "text",
+          "id": "service_text",
+          "label": "Service Text"
+        },
+        {
+          "type": "textarea",
+          "id": "service_icon",
+          "label": "Service Icon"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Service Section"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,85 @@
+<div class="container">
+  <section
+    class="hero pb-3 bg-cover bg-center d-flex align-items-center"
+    style="background: url({{ section.settings.hero_collection.featured_image | image_url }})"
+  >
+    <div class="container py-5">
+      <div class="row px-4 px-lg-5">
+        <div class="col-lg-6">
+          <!-- Removed a class from p tag: text-muted -->
+          <p class="small text-uppercase mb-2" style="color:{{ section.settings.hero_light_color }};">
+            {{ section.settings.hero_light_text }}
+          </p>
+          <h1 class="h2 text-uppercase mb-3" style="color:{{ section.settings.hero_bold_color }};">
+            {{ section.settings.hero_bold_text }}
+          </h1>
+          <a
+            class="btn btn-dark"
+            style="background-color: {{ section.settings.button_color }}; border-color: {{ section.settings.button_color }}; color: {{ section.settings.button_font_color }};"
+            href="{{ section.settings.hero_collection.url }}"
+          >
+            {{- section.settings.button_text -}}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Home Bannner",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "hero_collection",
+      "label": "Hero Collection"
+    },
+    {
+      "type": "text",
+      "id": "hero_light_text",
+      "label": "Hero Light Text"
+    },
+    {
+      "type": "color",
+      "id": "hero_light_color",
+      "label": "Hero Light Color",
+      "default": "#6c757d"
+    },
+    {
+      "type": "text",
+      "id": "hero_bold_text",
+      "label": "Hero Bold Text"
+    },
+    {
+      "type": "color",
+      "id": "hero_bold_color",
+      "label": "Hero Bold Color",
+      "default": "#212529"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Button Color",
+      "default": "#000"
+    },
+    {
+      "type": "color",
+      "id": "button_font_color",
+      "label": "Button Font Color",
+      "default": "#fff"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Browse collections"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Home Banner"
+    }
+  ]
+}
+{% endschema %}

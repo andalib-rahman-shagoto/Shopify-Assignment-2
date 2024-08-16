@@ -1,0 +1,155 @@
+<div class="page-holder bg-light">
+  <section class="py-5">
+    <div class="container">
+      <h2 class="h5 text-uppercase mb-4">{{ section.settings.heading }}</h2>
+      <div class="row">
+        {% for block in section.blocks %}
+          {% if block.type == 'related_products' %}
+            <!-- Modal -->
+            <div class="modal fade" id="productView" tabindex="-1">
+              <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content overflow-hidden border-0">
+                  <button
+                    class="btn-close p-4 position-absolute top-0 end-0 z-index-20 shadow-0"
+                    type="button"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                  <div class="modal-body p-0">
+                    <div class="row align-items-stretch">
+                      <div class="col-lg-6 p-lg-0">
+                        <a
+                          class="glightbox product-view d-block h-100 bg-cover bg-center"
+                          style="background: url({{ block.settings.rel_prod.featured_image | image_url }})"
+                          href="{{ block.settings.rel_prod.featured_image | image_url }}"
+                          data-gallery="gallery1"
+                          data-glightbox="{{ block.settings.rel_prod.title }}"
+                        ></a>
+                        {% for image in block.settings.rel_prod.images %}
+                          {% if image == block.settings.rel_prod.featured_image %}
+                            {% continue %}
+                          {% endif %}
+                          <a
+                            class="glightbox d-none"
+                            href="{{ image | image_url }}"
+                            data-gallery="gallery1"
+                            data-glightbox="{{ block.settings.rel_prod.title }}"
+                          ></a>
+                        {% endfor %}
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="p-4 my-md-4">
+                          <ul class="list-inline mb-2">
+                            <li class="list-inline-item m-0"><i class="fas fa-star small text-warning"></i></li>
+                            <li class="list-inline-item m-0 1"><i class="fas fa-star small text-warning"></i></li>
+                            <li class="list-inline-item m-0 2"><i class="fas fa-star small text-warning"></i></li>
+                            <li class="list-inline-item m-0 3"><i class="fas fa-star small text-warning"></i></li>
+                            <li class="list-inline-item m-0 4"><i class="fas fa-star small text-warning"></i></li>
+                          </ul>
+                          <h2 class="h4">{{ block.settings.rel_prod.title }}</h2>
+                          <p class="text-muted">{{ block.settings.rel_prod.price | money }}</p>
+                          <p class="text-sm mb-4">
+                            {{ block.settings.rel_prod.content }}
+                          </p>
+                          <div class="row align-items-stretch mb-4 gx-0">
+                            <div class="col-sm-7">
+                              <div class="border d-flex align-items-center justify-content-between py-1 px-3">
+                                <span class="small text-uppercase text-gray mr-4 no-select">Quantity</span>
+                                <div class="quantity">
+                                  <button class="dec-btn p-0"><i class="fas fa-caret-left"></i></button>
+                                  <input class="form-control border-0 shadow-0 p-0" type="text" value="1">
+                                  <button class="inc-btn p-0"><i class="fas fa-caret-right"></i></button>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-sm-5">
+                              <a
+                                class="btn btn-dark btn-sm w-100 h-100 d-flex align-items-center justify-content-center px-0"
+                                href="/cart/add/{{ block.settings.rel_prod.variants.first.id }}"
+                                >Add to cart</a
+                              >
+                            </div>
+                          </div>
+                          <a class="btn btn-link text-dark text-decoration-none p-0" href="#!"
+                            ><i class="far fa-heart me-2"></i>Add to wish list</a
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Content -->
+            <div class="col-lg-3 col-sm-6">
+              <div class="product text-center skel-loader">
+                <div class="d-block mb-3 position-relative">
+                  <a class="d-block" href="{{ block.settings.rel_prod.url }}"
+                    ><img
+                      class="img-fluid w-100"
+                      src="{{ block.settings.rel_prod.featured_image | image_url }}"
+                      alt="..."
+                  ></a>
+                  <div class="product-overlay">
+                    <ul class="mb-0 list-inline">
+                      <li class="list-inline-item m-0 p-0">
+                        <a class="btn btn-sm btn-outline-dark" href="#!"><i class="far fa-heart"></i></a>
+                      </li>
+                      <li class="list-inline-item m-0 p-0">
+                        <a class="btn btn-sm btn-dark" href="/cart/add/{{ block.settings.rel_prod.variants.first.id }}"
+                          >Add to cart</a
+                        >
+                      </li>
+                      <li class="list-inline-item mr-0">
+                        <a class="btn btn-sm btn-outline-dark" href="#productView" data-bs-toggle="modal"
+                          ><i class="fas fa-expand"></i
+                        ></a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <h6>
+                  <a class="reset-anchor" href="detail.html">{{ block.settings.rel_prod.title }}</a>
+                </h6>
+                <p class="small text-muted">{{ block.settings.rel_prod.price | money }}</p>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Related Products",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Related products"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Related Products",
+      "type": "related_products",
+      "settings": [
+        {
+          "type": "product",
+          "id": "rel_prod",
+          "label": "Product"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Related Products"
+    }
+  ]
+}
+{% endschema %}

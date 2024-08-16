@@ -1,14 +1,15 @@
 <div class="container">
   <section class="py-5">
-    <h2 class="h5 text-uppercase mb-4">Shopping cart</h2>
+    <h2 class="h5 text-uppercase mb-4">{{ section.settings.cart_text }}</h2>
 
     <div class="row">
       <div class="col-lg-8 mb-4 mb-lg-0">
         {% if cart.empty? %}
-          <h1>Your Cart Is Empty</h1>
-          <a class="btn btn-outline-dark btn-sm" href="/collections/all"
-            >Continue Shopping<i class="fas fa-long-arrow-alt-left ms-2"></i
-          ></a>
+          <h1>{{ section.settings.cart_empty_text }}</h1>
+          <a class="btn btn-outline-dark btn-sm" href="/collections/all">
+            <i class="fas fa-long-arrow-alt-left me-2"></i>
+            {{- section.settings.continue_shopping_text1 -}}
+          </a>
         {% else %}
           <!-- CART TABLE -->
           <!-- Form -->
@@ -46,7 +47,9 @@
                       </td>
                       <td class="p-3 align-middle border-light">
                         <div class="border d-flex align-items-center justify-content-between px-3">
-                          <span class="small text-uppercase text-gray headings-font-family">Quantity</span>
+                          <span class="small text-uppercase text-gray headings-font-family">
+                            {{- section.settings.quantity_text -}}
+                          </span>
                           <div class="quantity">
                             <button class="dec-btn p-0"><i class="fas fa-caret-left"></i></button>
                             <input
@@ -80,8 +83,8 @@
               <div class="row align-items-center text-center">
                 <div class="col-md-6 mb-3 mb-md-0 text-md-start">
                   <a class="btn btn-link p-0 text-dark btn-sm" href="/collections/all"
-                    ><i class="fas fa-long-arrow-alt-left me-2"> </i>Continue Shopping</a
-                  >
+                    ><i class="fas fa-long-arrow-alt-left me-2"> </i>{{ section.settings.continue_shopping_text2 -}}
+                  </a>
                 </div>
 
                 <div class="col-md-6 text-md-end">
@@ -98,15 +101,15 @@
       <div class="col-lg-4">
         <div class="card border-0 rounded-0 p-lg-4 bg-light">
           <div class="card-body">
-            <h5 class="text-uppercase mb-4">Cart total</h5>
+            <h5 class="text-uppercase mb-4">{{ section.settings.cart_total_text }}</h5>
             <ul class="list-unstyled mb-0">
               <li class="d-flex align-items-center justify-content-between">
-                <strong class="text-uppercase small font-weight-bold">Subtotal</strong
+                <strong class="text-uppercase small font-weight-bold">{{ section.settings.subtotal_text }}</strong
                 ><span class="text-muted small">{{ cart.original_total_price | money }}</span>
               </li>
               <li class="border-bottom my-2"></li>
               <li class="d-flex align-items-center justify-content-between mb-4">
-                <strong class="text-uppercase small font-weight-bold">Total</strong
+                <strong class="text-uppercase small font-weight-bold">{{ section.settings.total_text }}</strong
                 ><span>{{ cart.total_price | money }}</span>
               </li>
               <li>
@@ -114,7 +117,7 @@
                   <div class="input-group mb-0">
                     <input class="form-control" type="text" placeholder="Enter your coupon">
                     <button class="btn btn-dark btn-sm w-100" type="submit">
-                      <i class="fas fa-gift me-2"></i>Apply coupon
+                      <i class="fas fa-gift me-2"></i>{{ section.settings.coupon_text }}
                     </button>
                   </div>
                 </form>
@@ -130,7 +133,62 @@
 {% schema %}
 {
   "name": "Boutique Cart",
-  "settings": [],
+  "settings": [
+    {
+      "type": "text",
+      "id": "cart_text",
+      "label": "Cart Text",
+      "default": "Shopping cart"
+    },
+    {
+      "type": "text",
+      "id": "continue_shopping_text1",
+      "label": "Continue Shopping Text 1",
+      "default": "Continue Shopping"
+    },
+    {
+      "type": "text",
+      "id": "continue_shopping_text2",
+      "label": "Continue Shopping Text 2",
+      "default": "Continue Shopping"
+    },
+    {
+      "type": "text",
+      "id": "quantity_text",
+      "label": "Quantity Text",
+      "default": "Quantity"
+    },
+    {
+      "type": "text",
+      "id": "cart_empty_text",
+      "label": "Cart Empty Text",
+      "default": "Your Cart Is Empty"
+    },
+    {
+      "type": "text",
+      "id": "coupon_text",
+      "label": "Coupon Text",
+      "default": "Apply coupon"
+    },
+    {
+      "type": "text",
+      "id": "cart_total_text",
+      "label": "Cart Total Text",
+      "default": "Cart total"
+    },
+    {
+      "type": "text",
+      "id": "subtotal_text",
+      "label": "Subtotal Text",
+      "default": "Subtotal"
+    },
+    {
+      "type": "text",
+      "id": "total_text",
+      "label": "Total Text",
+      "default": "Total"
+    },
+  ],
   "presets": [
     {
       "name": "Boutique Cart"
